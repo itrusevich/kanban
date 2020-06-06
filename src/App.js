@@ -22,9 +22,11 @@ function App() {
 
   const [isOpenCreateTaskForm, setIsOpenCreateTaskForm] = useState(false);
   const [isActiveButtonTaskCreate, setIsActiveButtonTaskCreate] = useState(false);
-  const [taskInput, setTaskInput] = useState();
+  const [taskInput, setTaskInput] = useState('');
   const [priorityInput, setPriorityInput] = useState('');
   const [tasks, setTasks] = useState(initialTasks);
+  const [isValidTaskInput, setIsValidTaskInput] = useState(false);
+  const [isValidPriorityInput, setIsValidPriorityInput] = useState(false);
 
   const onStatusChangeRight = (id) => {
     const updatedTasks = [...tasks].map(el => {
@@ -46,51 +48,54 @@ function App() {
     setTasks(updatedTasks);
   }
 
-    const openCreateTaskForm = () => {
-      setIsOpenCreateTaskForm(true);
-    };
+  const openCreateTaskForm = () => {
+    setIsOpenCreateTaskForm(true);
+  };
 
-    const onTaskChange = (e) => {
-      if (e.target.value.length > 4);
-      setTaskInput(e.target.value);
-    };
+  const onTaskChange = (e) => {
+    setIsValidTaskInput(e.target.value.length > 4)
+    setTaskInput(e.target.value);
+  };
 
-    const onPriorityChange = (e) => {
-      setIsActiveButtonTaskCreate(e.target.value.length >= 1);
-      setPriorityInput(e.target.value);
-    };
+  const onPriorityChange = (e) => {
+    setIsValidPriorityInput(e.target.value.length >= 1);
+    setPriorityInput(e.target.value);
+  };
 
-    const taskSubmit = (e) => {
-      const updatedTasks = [...initialTasks];
-      updatedTasks.push({ id: Math.random(), name: taskInput, priority: priorityInput, status: 'TODO' });
-      setTasks(updatedTasks);
-      taskReset();
-    };
+  const taskSubmit = (e) => {
+    const updatedTasks = [...initialTasks];
+    updatedTasks.push({ id: Math.random(), name: taskInput, priority: priorityInput, status: 'TODO' });
+    setTasks(updatedTasks);
+    taskReset();
+  };
 
-    const taskReset = () => {
-      setTaskInput('');
-      setPriorityInput('');
-      setIsOpenCreateTaskForm(false);
-      setIsActiveButtonTaskCreate(false);
-    };
+  const taskReset = () => {
+    setTaskInput('');
+    setPriorityInput('');
+    setIsOpenCreateTaskForm(false);
+    setIsActiveButtonTaskCreate(false);
+  };
 
-    return (
-      <div className="container">
-        <Header openCreateTaskForm={openCreateTaskForm}
-          onTaskChange={onTaskChange}
-          taskSubmit={taskSubmit}
-          taskReset={taskReset}
-          isOpenCreateTaskForm={isOpenCreateTaskForm}
-          taskInput={taskInput}
-          isActiveButtonTaskCreate={isActiveButtonTaskCreate}
-          onPriorityChange={onPriorityChange}
-          priorityInput={priorityInput}
-        />
-        <Board tasks={tasks} statuses={statuses} 
+  return (
+    <div className="container">
+      <Header openCreateTaskForm={openCreateTaskForm}
+        onTaskChange={onTaskChange}
+        taskSubmit={taskSubmit}
+        taskReset={taskReset}
+        isOpenCreateTaskForm={isOpenCreateTaskForm}
+        taskInput={taskInput}
+        isActiveButtonTaskCreate={isActiveButtonTaskCreate}
+        onPriorityChange={onPriorityChange}
+        priorityInput={priorityInput}
+        isValidTaskInput={isValidTaskInput}
+        isValidPriorityInput={isValidPriorityInput}
+
+      />
+      <Board tasks={tasks} statuses={statuses}
         onStatusChangeRight={onStatusChangeRight}
-        onStatusChangeLeft={onStatusChangeLeft}/>
-      </div>
-    );
-  }
+        onStatusChangeLeft={onStatusChangeLeft} />
+    </div>
+  );
+}
 
-  export default App;
+export default App;

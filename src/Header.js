@@ -28,7 +28,7 @@ function Header(props) {
 
           <button type="submit" className="btn btn-primary"
             onClick={props.taskSubmit}
-            disabled={!props.isActiveButtonTaskCreate}>Submit</button>
+            disabled={!(props.isValidTaskInput && props.isValidPriorityInput)}>Submit</button>
 
           <button className="btn btn-secondary"
             onClick={props.taskReset}
