@@ -38,6 +38,14 @@ function App() {
     setTasks(updatedTasks);
   }
 
+  const onTaskSave = (task) => {
+    const updatedTasks = tasks.map(el=> {
+      if(el.id === task.id) return {...el, name: task.name}
+      else return el;
+    })
+    setTasks(updatedTasks);
+  };
+
   const onStatusChangeLeft = (id) => {
     const updatedTasks = [...tasks].map(el => {
       if (el.id === id && el.status === 'DONE') return { ...el, status: 'REVIEW' };
@@ -47,6 +55,11 @@ function App() {
     })
     setTasks(updatedTasks);
   }
+
+  const onTaskDelete = (id) => {
+    const updatedTasks = tasks.filter(el => el.id !== id)
+    setTasks(updatedTasks);
+  };
 
   const openCreateTaskForm = () => {
     setIsOpenCreateTaskForm(true);
@@ -92,8 +105,10 @@ function App() {
 
       />
       <Board tasks={tasks} statuses={statuses}
+        onTaskDelete={onTaskDelete}
         onStatusChangeRight={onStatusChangeRight}
-        onStatusChangeLeft={onStatusChangeLeft} />
+        onStatusChangeLeft={onStatusChangeLeft} 
+        onTaskSave={onTaskSave}/>
     </div>
   );
 }
