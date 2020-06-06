@@ -5,10 +5,10 @@ function Board(props) {
   return (
     <div className="container">
       <div>
-        <ul className="list-group list-group-horizontal flex-row">
+        <ul className="list-group list-group-horizontal">
           {props.statuses.map((status, ind) => {
             if (ind === 0) {
-              return (<div>
+              return (
                 <li className="list-group-item" key={status.name}>
                   <div className="col-sm">
                     {status.name}
@@ -22,11 +22,10 @@ function Board(props) {
                     </ul>
                   </div>
                 </li>
-              </div>
               )
             } 
             if (ind === props.statuses.length - 1) {
-              return (<div>
+              return (
                 <li className="list-group-item" key={status.name}>
                   <div className="col-sm">
                     {status.name}
@@ -41,10 +40,9 @@ function Board(props) {
                     </ul>
                   </div>
                 </li>
-              </div>
               )
             } else {
-              return (<div>
+              return (
                 <li className="list-group-item" key={status.name}>
                   <div className="col-sm">
                     {status.name}
@@ -54,12 +52,15 @@ function Board(props) {
                         .map(el => <li key={el.id} className="list-group-item">
                           Task: {el.name} Priority: {el.priority}
                           <br />
-                          <button onClick={() => props.onStatusChangeLeft(el.id)}>◀️</button>
-                          <button onClick={() => props.onStatusChangeRight(el.id)}>▶️</button></li>)}
+                          <div className="buttons">
+                            <button onClick={() => props.onStatusChangeLeft(el.id)}>◀️</button>
+                            <button onClick={() => props.onStatusChangeRight(el.id)}>▶️</button>
+                          
+                            </div>
+                          </li>)}
                     </ul>
                   </div>
                 </li>
-              </div>
               )
             }
           })}

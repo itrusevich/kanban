@@ -27,8 +27,7 @@ function App() {
   const [tasks, setTasks] = useState(initialTasks);
 
   const onStatusChangeRight = (id) => {
-    const updatedTasks = [...initialTasks];
-    updatedTasks.map(el => {
+    const updatedTasks = [...tasks].map(el => {
       if (el.id === id && el.status === 'TODO') return { ...el, status: 'IN PROGRESS' };
       if (el.id === id && el.status === 'IN PROGRESS') return { ...el, status: 'REVIEW' };
       if (el.id === id && el.status === 'REVIEW') return { ...el, status: 'DONE' };
@@ -38,8 +37,7 @@ function App() {
   }
 
   const onStatusChangeLeft = (id) => {
-    const updatedTasks = [...initialTasks];
-    updatedTasks.map(el => {
+    const updatedTasks = [...tasks].map(el => {
       if (el.id === id && el.status === 'DONE') return { ...el, status: 'REVIEW' };
       else if (el.id === id && el.status === 'REVIEW') return { ...el, status: 'IN PROGRESS' };
       else if (el.id === id && el.status === 'IN PROGRESS') return { ...el, status: 'TODO' };
@@ -63,7 +61,6 @@ function App() {
     };
 
     const taskSubmit = (e) => {
-      e.preventDefault();
       const updatedTasks = [...initialTasks];
       updatedTasks.push({ id: Math.random(), name: taskInput, priority: priorityInput, status: 'TODO' });
       setTasks(updatedTasks);

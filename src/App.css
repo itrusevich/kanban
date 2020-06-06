@@ -20,4 +20,6 @@
 }
 
 
-
+.buttons {
+  display: flex;
+}
