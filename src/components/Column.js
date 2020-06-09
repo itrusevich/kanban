@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import TaskCard from './TaskCard';
 
+
 function Column(props) {
   return (
     <>
@@ -13,8 +14,7 @@ function Column(props) {
             onStatusChangeLeft={props.onStatusChangeLeft}
             onTaskDelete={props.onTaskDelete}
             onTaskSave={props.onTaskSave}
-            changePriorityPlus={props.changePriorityPlus}
-            //changePriorityMinus={props.changePriorityMinus} 
+            changePriority={props.changePriority}
             />
         ))
       }

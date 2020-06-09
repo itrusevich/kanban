@@ -21,7 +21,6 @@ function App() {
   const [priorityValue, setPriorityValue] = useState('0');
   const [tasks, setTasks] = useState(initialTasks);
   const [isValidTaskInput, setIsValidTaskInput] = useState(false);
-  const [count, setCount] = useState(priorityValue);
 
   const onStatusChangeRight = (id) => {
     const updatedTasks = tasks.map(el => {
@@ -79,21 +78,15 @@ function App() {
     setIsActiveButtonTaskCreate(false);
   };
 
-  // const changePriorityPlus = (id) => {
-  //   const updatedTasks = tasks.map(el => {
-  //     if (el.id === id && +el.priority > 1) return { ...el, priority: (+count - 1) }
-  //     else return el;
-  //   })
-  //   setTasks(updatedTasks);
-  // }
-
-  //   const changePriorityMinus = (id) => {
-  //     const updatedTasks = tasks.map(el => {
-  //       if (el.id === id) return { ...el, priority: (count - 1) }
-  //       else return el;
-  //   })
-  //   setTasks(updatedTasks);
-  // }
+  const changePriority = (id, isIncrease) => {
+    const task = tasks.find(task => task.id === id);
+    if(isIncrease) {
+      task.priority--;
+    } else {
+      task.priority++;
+    }
+    setTasks([...tasks]);
+  }
 
   return (
     <div className="container">
@@ -114,8 +107,7 @@ function App() {
         onStatusChangeLeft={onStatusChangeLeft}
         onTaskSave={onTaskSave}
         priorityValue={priorityValue}
-        //changePriorityPlus={changePriorityPlus}
-      //changePriorityMinus={changePriorityMinus}
+        changePriority={changePriority}
       />
     </div>
   );

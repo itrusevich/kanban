@@ -21,7 +21,7 @@ function Board(props) {
                     onStatusChangeLeft={props.onStatusChangeLeft}
                     onTaskDelete={props.onTaskDelete}
                     onTaskSave={props.onTaskSave}
-                    changePriorityPlus={props.changePriorityPlus}
+                    changePriority={props.changePriority}
                   />
                 </ul>
               </li>

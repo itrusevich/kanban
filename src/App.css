@@ -75,9 +75,31 @@ margin-right: 100px;
 } 
 
 .margin-left {
-  margin-left: 200px;
+  margin-left: auto;
 }
 
 .margin-left-med {
   margin-left: 150px;
+}
+
+.badge {
+  margin: 0 4px;
+}
+.task-priority .priority-button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+}
+
+.task-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-actions {
+  display: flex;
+  width: 36px;
+}
+.task-actions > * {
+  cursor: pointer;
 }

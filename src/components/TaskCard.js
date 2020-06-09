@@ -35,43 +35,50 @@ function Task(props) {
     <path d="M13.293 1.207a1 1 0 0 1 1.414 0l.03.03a1 1 0 0 1 .03 1.383L13.5 4 12 2.5l1.293-1.293z" />
   </svg>
 
+  const up = <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fillRule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+    <path fillRule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+  </svg>
+
+  const down = <svg className="bi bi-dash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fillRule="evenodd" d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z"/>
+</svg>
+
   return (
     <li key={props.task.id} className="task-card">
-      <span>
-        <label className="task-name mr-md-3">{props.task.name}</label>
+      <div className="task-title">
         {
           taskEdit.id === props.task.id
-            ? <>
-              <input type="text" className="form-control" value={taskEdit.name} onChange={onEditTaskChange} />
-              <button className="btn btn-outline-primary btn-sm margin-left mt-1" onClick={taskSave} disabled={!taskEdit.name.trim()}>Save</button>
-            </>
-            : <span onClick={() => editMode(props.task)}>{pen}</span>
+            ? <div>
+                <input type="text" className="form-control" value={taskEdit.name} onChange={onEditTaskChange} />
+                <button className="btn btn-outline-primary btn-sm margin-left mt-1" onClick={taskSave} disabled={!taskEdit.name.trim()}>Save</button>
+              </div>
+            : <label className="task-name mr-md-3">{props.task.name}</label>
         }
-      </span>
+        {  taskEdit.id !== props.task.id && <div className="task-actions">
+          <span onClick={() => editMode(props.task)}>{pen}</span>
+          <ModalDelete onTaskDelete={props.onTaskDelete} task={props.task} />
+        </div>}
+      </div>
       <div className="task-priority">
 
-      {/* <div onClick={()=>props.changePriorityPlus(props.task.id)}>+</div> */}
-      {/* <button onClick={props.changePriorityMinus(props.task.id)}>-</button> */}
-        
+        <button className="priority-button" disabled={props.task.priority === 1} onClick={() => props.changePriority(props.task.id, true)}>{up}</button>
         {
           (+props.task.priority === 1) ? <span className="badge badge-danger">High</span> : (+props.task.priority === 2) ? <span className="badge badge-warning">Medium</span> : <span className="badge badge-success">Low</span>
         }
+        <button className="priority-button" disabled={props.task.priority === 3} onClick={() => props.changePriority(props.task.id)}>{down}</button>
       </div>
 
       <div className="buttons">
-
-        <ModalDelete className="mr-md-5" onTaskDelete={props.onTaskDelete} task={props.task} />
-
         {
           (props.task.status === 'TODO') ?
-            <div className="ml-md-5" onClick={() => props.onStatusChangeRight(props.task.id)}>{right}</div> :
+            <div className="margin-left" onClick={() => props.onStatusChangeRight(props.task.id)}>{right}</div> :
             (props.task.status === 'DONE') ?
-              <div className="ml-md-5" onClick={() => props.onStatusChangeLeft(props.task.id)}>{left}</div> :
+              <div className="margin-left" onClick={() => props.onStatusChangeLeft(props.task.id)}>{left}</div> :
               <>
-                <div className="ml-md-5" onClick={() => props.onStatusChangeLeft(props.task.id)}>{left}</div>
+                <div className="margin-left" onClick={() => props.onStatusChangeLeft(props.task.id)}>{left}</div>
                 <div onClick={() => props.onStatusChangeRight(props.task.id)}>{right}</div>
               </>
-
         }
 
       </div>
