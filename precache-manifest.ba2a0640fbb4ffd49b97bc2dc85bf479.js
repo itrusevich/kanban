@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e8038df8c3a72228418a6dabc3c378b4",
+    "revision": "3359ff0734058e5cb3018f80c02991c2",
     "url": "/kanban/index.html"
   },
   {
-    "revision": "6c665250818932bb4a7a",
+    "revision": "271e92de48876d1a9e71",
     "url": "/kanban/static/css/2.829c9cb5.chunk.css"
   },
   {
-    "revision": "07fdeea9aa474eb7af6c",
+    "revision": "936076705d9c1cf2a7ba",
     "url": "/kanban/static/css/main.c3510687.chunk.css"
   },
   {
-    "revision": "6c665250818932bb4a7a",
-    "url": "/kanban/static/js/2.b207f15f.chunk.js"
+    "revision": "271e92de48876d1a9e71",
+    "url": "/kanban/static/js/2.9bc52bca.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/kanban/static/js/2.b207f15f.chunk.js.LICENSE.txt"
+    "url": "/kanban/static/js/2.9bc52bca.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "07fdeea9aa474eb7af6c",
-    "url": "/kanban/static/js/main.e90f322d.chunk.js"
+    "revision": "936076705d9c1cf2a7ba",
+    "url": "/kanban/static/js/main.8c8cb43f.chunk.js"
   },
   {
     "revision": "976ef6cdb26dba17901e",
