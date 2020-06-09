@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './App.css';
+import '../App.css';
 
 function Header(props) {
 
@@ -19,16 +18,18 @@ function Header(props) {
               value={props.taskInput}
               onChange={props.onTaskChange} />
 
-            <label htmlFor="exampleInputEmail1">Enter priority</label>
-            <input type="text" className="form-control"
-              value={props.priorityInput}
-              onChange={props.onPriorityChange} />
-
+            <label htmlFor="exampleInputEmail2">Enter priority:</label>
+            <select value={props.priorityValue} id="priority" className="form-control" onChange={props.onPriorityChange}>
+            <option value="0">select priority</option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
           </div>
 
           <button type="submit" className="btn btn-primary"
             onClick={props.taskSubmit}
-            disabled={!(props.isValidTaskInput && props.isValidPriorityInput)}>Submit</button>
+            disabled={!(props.isValidTaskInput && props.priorityValue !== '0')}>Submit</button>
 
           <button className="btn btn-secondary"
             onClick={props.taskReset}

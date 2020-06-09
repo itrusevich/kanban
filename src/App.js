@@ -1,60 +1,51 @@
 import React, { useState } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import Header from './Header';
-import Board from './Board';
+import Header from './components/Header';
+import Board from './components/Board';
 import './App.css';
 
 function App() {
   const initialTasks = [
-    { id: 1, name: 'Create F1', priority: 9, status: 'TODO' },
+    { id: 1, name: 'Create F1', priority: 1, status: 'TODO' },
     { id: 2, name: 'Edit F2', priority: 2, status: 'REVIEW' },
-    { id: 3, name: 'Remove F3', priority: 7, status: 'DONE' },
-    { id: 4, name: 'Create F4', priority: 7, status: 'IN PROGRESS' },
-    { id: 5, name: 'Edit F5', priority: 10, status: 'TODO' },
+    { id: 3, name: 'Remove F3', priority: 3, status: 'DONE' },
+    { id: 4, name: 'Create F4', priority: 1, status: 'IN PROGRESS' },
+    { id: 5, name: 'Edit F5', priority: 2, status: 'TODO' },
   ];
 
-  const statuses = [
-    { name: 'TODO' },
-    { name: 'IN PROGRESS' },
-    { name: 'REVIEW' },
-    { name: 'DONE' },
-  ];
+  const statuses = ['TODO', 'IN PROGRESS', 'REVIEW','DONE'];
 
   const [isOpenCreateTaskForm, setIsOpenCreateTaskForm] = useState(false);
   const [isActiveButtonTaskCreate, setIsActiveButtonTaskCreate] = useState(false);
   const [taskInput, setTaskInput] = useState('');
-  const [priorityInput, setPriorityInput] = useState('');
+  const [priorityValue, setPriorityValue] = useState('0');
   const [tasks, setTasks] = useState(initialTasks);
   const [isValidTaskInput, setIsValidTaskInput] = useState(false);
-  const [isValidPriorityInput, setIsValidPriorityInput] = useState(false);
+
 
   const onStatusChangeRight = (id) => {
-    const updatedTasks = [...tasks].map(el => {
-      if (el.id === id && el.status === 'TODO') return { ...el, status: 'IN PROGRESS' };
-      if (el.id === id && el.status === 'IN PROGRESS') return { ...el, status: 'REVIEW' };
-      if (el.id === id && el.status === 'REVIEW') return { ...el, status: 'DONE' };
+    const updatedTasks = tasks.map(el => {
+      if (el.id === id) return { ...el, status: statuses[statuses.indexOf(el.status) + 1] }
       else return el;
+    })
+    setTasks(updatedTasks);
+  }
+
+  const onStatusChangeLeft = (id) => {
+    const updatedTasks = tasks.map(el => {
+        if (el.id === id) return { ...el, status: statuses[statuses.indexOf(el.status) - 1] }
+        else return el;
     })
     setTasks(updatedTasks);
   }
 
   const onTaskSave = (task) => {
-    const updatedTasks = tasks.map(el=> {
-      if(el.id === task.id) return {...el, name: task.name}
+    const updatedTasks = tasks.map(el => {
+      if (el.id === task.id) return { ...el, name: task.name }
       else return el;
     })
     setTasks(updatedTasks);
   };
-
-  const onStatusChangeLeft = (id) => {
-    const updatedTasks = [...tasks].map(el => {
-      if (el.id === id && el.status === 'DONE') return { ...el, status: 'REVIEW' };
-      else if (el.id === id && el.status === 'REVIEW') return { ...el, status: 'IN PROGRESS' };
-      else if (el.id === id && el.status === 'IN PROGRESS') return { ...el, status: 'TODO' };
-      else return el;
-    })
-    setTasks(updatedTasks);
-  }
 
   const onTaskDelete = (id) => {
     const updatedTasks = tasks.filter(el => el.id !== id)
@@ -71,20 +62,19 @@ function App() {
   };
 
   const onPriorityChange = (e) => {
-    setIsValidPriorityInput(e.target.value.length >= 1);
-    setPriorityInput(e.target.value);
+    setPriorityValue(e.target.value);
   };
 
   const taskSubmit = (e) => {
-    const updatedTasks = [...initialTasks];
-    updatedTasks.push({ id: Math.random(), name: taskInput, priority: priorityInput, status: 'TODO' });
+    const updatedTasks = [...tasks];
+    updatedTasks.push({ id: Math.random(), name: taskInput, priority: priorityValue, status: 'TODO' });
     setTasks(updatedTasks);
     taskReset();
   };
 
   const taskReset = () => {
     setTaskInput('');
-    setPriorityInput('');
+    setPriorityValue('0');
     setIsOpenCreateTaskForm(false);
     setIsActiveButtonTaskCreate(false);
   };
@@ -99,16 +89,15 @@ function App() {
         taskInput={taskInput}
         isActiveButtonTaskCreate={isActiveButtonTaskCreate}
         onPriorityChange={onPriorityChange}
-        priorityInput={priorityInput}
+        priorityValue={priorityValue}
         isValidTaskInput={isValidTaskInput}
-        isValidPriorityInput={isValidPriorityInput}
-
       />
       <Board tasks={tasks} statuses={statuses}
         onTaskDelete={onTaskDelete}
         onStatusChangeRight={onStatusChangeRight}
-        onStatusChangeLeft={onStatusChangeLeft} 
-        onTaskSave={onTaskSave}/>
+        onStatusChangeLeft={onStatusChangeLeft}
+        onTaskSave={onTaskSave} 
+        priorityValue={priorityValue}/>
     </div>
   );
 }
