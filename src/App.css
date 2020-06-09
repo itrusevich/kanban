@@ -19,7 +19,65 @@
   }
 }
 
+.container {
+  margin-bottom: 24px ;
+}
 
-.buttons {
+.board {
   display: flex;
+  flex-direction: row;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #77b9ff;
+}
+
+.buttons-container button{
+  margin-right: 12px;
+}
+
+.column {
+  flex: 25%;
+}
+
+.column:not(:last-child) {
+  border-right: 1px solid #77b9ff;
+}
+.column-title {
+  background-color: #b0d6fe;
+  padding: 4px 16px;
+}
+
+.cards-container {
+  padding: 0;
+  list-style: none;
+  padding: 8px;
+}
+
+.task-card {
+  padding: 8px;
+  background-color: #f0f5fa;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border: 1px solid #bcdbfa;
+  box-shadow: 0 0 1px 0 rgba(9,30,66,.31), 0 2px 4px -1px rgba(9,30,66,.25);
+}
+
+.task-name {
+  font-weight: bold;
+}
+.buttons {
+  padding-top: 12px;
+  display: flex;
+}
+
+.margin-right {
+margin-right: 100px;
+} 
+
+.margin-left {
+  margin-left: 200px;
+}
+
+.margin-left-med {
+  margin-left: 150px;
 }

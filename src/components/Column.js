@@ -7,12 +7,17 @@ function Column(props) {
     <>
       {props.tasks.filter(el => el.status === props.status)
         .sort((a, b) => +a.priority - (+b.priority))
-        .map(el => <TaskCard task={el}
-                             onStatusChangeRight={props.onStatusChangeRight}
-                             onStatusChangeLeft={props.onStatusChangeLeft}
-                             onTaskDelete={props.onTaskDelete}
-                             onTaskSave={props.onTaskSave}
-                             />)}
+        .map(el => (
+          <TaskCard task={el}
+            onStatusChangeRight={props.onStatusChangeRight}
+            onStatusChangeLeft={props.onStatusChangeLeft}
+            onTaskDelete={props.onTaskDelete}
+            onTaskSave={props.onTaskSave}
+            changePriorityPlus={props.changePriorityPlus}
+            //changePriorityMinus={props.changePriorityMinus} 
+            />
+        ))
+      }
     </>
   )
 }

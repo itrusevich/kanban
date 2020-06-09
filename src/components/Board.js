@@ -7,22 +7,23 @@ function Board(props) {
   return (
     <div className="container">
       <div>
-        <ul className="list-group list-group-horizontal">
+        <ul className="board">
           {props.statuses.map(status => {
             return (
-              <li className="list-group-item" key={status}>
-                <div className="col-sm">
+              <li className="column" key={status}>
+                <div className="column-title">
                   {status}
-                  <ul className="list-group">
-                    <Column tasks={props.tasks}
-                      status={status}
-                      onStatusChangeRight={props.onStatusChangeRight}
-                      onStatusChangeLeft={props.onStatusChangeLeft}
-                      onTaskDelete={props.onTaskDelete}
-                      onTaskSave={props.onTaskSave}
-                    />
-                  </ul>
                 </div>
+                <ul className="cards-container">
+                  <Column tasks={props.tasks}
+                    status={status}
+                    onStatusChangeRight={props.onStatusChangeRight}
+                    onStatusChangeLeft={props.onStatusChangeLeft}
+                    onTaskDelete={props.onTaskDelete}
+                    onTaskSave={props.onTaskSave}
+                    changePriorityPlus={props.changePriorityPlus}
+                  />
+                </ul>
               </li>
             )
           })}

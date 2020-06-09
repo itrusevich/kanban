@@ -20,20 +20,22 @@ function Header(props) {
 
             <label htmlFor="exampleInputEmail2">Enter priority:</label>
             <select value={props.priorityValue} id="priority" className="form-control" onChange={props.onPriorityChange}>
-            <option value="0">select priority</option>
+              <option value="0">select priority</option>
               <option value="1">High</option>
               <option value="2">Medium</option>
               <option value="3">Low</option>
             </select>
           </div>
 
-          <button type="submit" className="btn btn-primary"
-            onClick={props.taskSubmit}
-            disabled={!(props.isValidTaskInput && props.priorityValue !== '0')}>Submit</button>
+          <div className="buttons-container">
+            <button type="submit" className="btn btn-primary"
+              onClick={props.taskSubmit}
+              disabled={!(props.isValidTaskInput && props.priorityValue !== '0')}>Submit</button>
 
-          <button className="btn btn-secondary"
-            onClick={props.taskReset}
-          >Cancel</button>
+            <button className="btn btn-secondary"
+              onClick={props.taskReset}
+            >Cancel</button>
+          </div>
         </form>
       }
     </div>

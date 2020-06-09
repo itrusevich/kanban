@@ -13,7 +13,7 @@ function App() {
     { id: 5, name: 'Edit F5', priority: 2, status: 'TODO' },
   ];
 
-  const statuses = ['TODO', 'IN PROGRESS', 'REVIEW','DONE'];
+  const statuses = ['TODO', 'IN PROGRESS', 'REVIEW', 'DONE'];
 
   const [isOpenCreateTaskForm, setIsOpenCreateTaskForm] = useState(false);
   const [isActiveButtonTaskCreate, setIsActiveButtonTaskCreate] = useState(false);
@@ -21,7 +21,7 @@ function App() {
   const [priorityValue, setPriorityValue] = useState('0');
   const [tasks, setTasks] = useState(initialTasks);
   const [isValidTaskInput, setIsValidTaskInput] = useState(false);
-
+  const [count, setCount] = useState(priorityValue);
 
   const onStatusChangeRight = (id) => {
     const updatedTasks = tasks.map(el => {
@@ -33,8 +33,8 @@ function App() {
 
   const onStatusChangeLeft = (id) => {
     const updatedTasks = tasks.map(el => {
-        if (el.id === id) return { ...el, status: statuses[statuses.indexOf(el.status) - 1] }
-        else return el;
+      if (el.id === id) return { ...el, status: statuses[statuses.indexOf(el.status) - 1] }
+      else return el;
     })
     setTasks(updatedTasks);
   }
@@ -79,6 +79,22 @@ function App() {
     setIsActiveButtonTaskCreate(false);
   };
 
+  // const changePriorityPlus = (id) => {
+  //   const updatedTasks = tasks.map(el => {
+  //     if (el.id === id && +el.priority > 1) return { ...el, priority: (+count - 1) }
+  //     else return el;
+  //   })
+  //   setTasks(updatedTasks);
+  // }
+
+  //   const changePriorityMinus = (id) => {
+  //     const updatedTasks = tasks.map(el => {
+  //       if (el.id === id) return { ...el, priority: (count - 1) }
+  //       else return el;
+  //   })
+  //   setTasks(updatedTasks);
+  // }
+
   return (
     <div className="container">
       <Header openCreateTaskForm={openCreateTaskForm}
@@ -96,8 +112,11 @@ function App() {
         onTaskDelete={onTaskDelete}
         onStatusChangeRight={onStatusChangeRight}
         onStatusChangeLeft={onStatusChangeLeft}
-        onTaskSave={onTaskSave} 
-        priorityValue={priorityValue}/>
+        onTaskSave={onTaskSave}
+        priorityValue={priorityValue}
+        //changePriorityPlus={changePriorityPlus}
+      //changePriorityMinus={changePriorityMinus}
+      />
     </div>
   );
 }
